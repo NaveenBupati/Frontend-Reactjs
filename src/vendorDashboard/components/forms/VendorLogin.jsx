@@ -20,7 +20,7 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/vendor/login', {
+      const response = await fetch('https://backend-nodejs-restaurent-register-apis.onrender.com/vendor/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
         setPassword('');
 
         const vendorId = data.vendorId;
-        const vendorResponse = await fetch(`http://localhost:8080/vendor/singleVendor/${vendorId}`);
+        const vendorResponse = await fetch(`https://backend-nodejs-restaurent-register-apis.onrender.com/vendor/singleVendor/${vendorId}`);
         const vendorData = await vendorResponse.json();
 
         if (vendorResponse.ok && vendorData.vendorFirmId) {
