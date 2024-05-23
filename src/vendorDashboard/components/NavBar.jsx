@@ -5,9 +5,9 @@ import logo from '../components/sgv.png'; // Import your logo image file
 
 const NavBar = ({ showLoginHandler, showRegisterHandler, showWelcomeHandler, showLogOut, onLogout }) => {
     const [isToggled, setIsToggled] = useState(false);
-
-    const restaurantName = localStorage.getItem('firmName');
-
+    useEffect(() => {
+        setRestaurantName(localStorage.getItem('firmName') || '');
+    }, []);
     const toggleNavbar = () => {
         setIsToggled(!isToggled);
     };
