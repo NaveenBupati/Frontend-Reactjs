@@ -75,7 +75,7 @@ const AllProducts = () => {
                         products.map(product => (
                             <div className="col-md-4 mb-4" key={product._id}>
                                 <Card className="product-card h-100">
-                                    {product.image && <Card.Img variant="top" src={product.image} />} {/* Use product.image directly */}
+                                    {product.image && <Card.Img variant="top" src={`https://backend-nodejs-restaurent-register-apis.onrender.com/uploads/${product.image}`} />}
                                     <Card.Body className="d-flex flex-column">
                                         <Card.Title>{product.productName}</Card.Title>
                                         <Card.Text><strong>Description:</strong> {product.description}</Card.Text>
