@@ -13,6 +13,21 @@ const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, 
         setIsSidebarOpen(false);
     };
 
+    const handleShowFirm = () => {
+        showFirmHandler();
+        handleClose();
+    };
+
+    const handleShowProduct = () => {
+        showProductHandler();
+        handleClose();
+    };
+
+    const handleShowAllProducts = () => {
+        showAllProductsHandler();
+        handleClose();
+    };
+
     return (
         <>
             {!isSidebarOpen && (
@@ -44,7 +59,7 @@ const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, 
                             {showFirmTitle ? (
                                 <span 
                                     className="nav-link text-dark sidebar-link mt-3" 
-                                    onClick={showFirmHandler} 
+                                    onClick={handleShowFirm} 
                                     style={{ cursor: "pointer" }}
                                 >
                                     <FontAwesomeIcon icon={faPlus} />
@@ -55,7 +70,7 @@ const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, 
                         <li className="nav-item">
                             <span 
                                 className="nav-link text-dark sidebar-link mt-4" 
-                                onClick={showProductHandler} 
+                                onClick={handleShowProduct} 
                                 style={{ cursor: "pointer" }}
                             >
                                 <FontAwesomeIcon icon={faBuilding} /> Add Product
@@ -64,7 +79,7 @@ const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, 
                         <li className="nav-item">
                             <span 
                                 className="nav-link text-dark sidebar-link mt-4" 
-                                onClick={showAllProductsHandler} 
+                                onClick={handleShowAllProducts} 
                                 style={{ cursor: "pointer" }}
                             >
                                 <FontAwesomeIcon icon={faList} /> All Products
