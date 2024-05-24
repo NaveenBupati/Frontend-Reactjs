@@ -1,79 +1,100 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faTimes, faUser, faUserPlus, faUtensils } from '@fortawesome/free-solid-svg-icons';
-import logo from '../components/sgv.png'; // Import your logo image file
+import { faPlus, faBuilding, faList, faUsers, faBars } from '@fortawesome/free-solid-svg-icons';
 
-const NavBar = ({ showLoginHandler, showRegisterHandler, showWelcomeHandler, showLogOut, onLogout }) => {
-    const [isToggled, setIsToggled] = useState(false);
+const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, showFirmTitle }) => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    const restaurantName = localStorage.getItem('firmName');
+    const handleSidebarToggle = () => {
+        setIsSidebarOpen(!isSidebarOpen);
+    };
 
-    const toggleNavbar = () => {
-        setIsToggled(!isToggled);
+    const handleClose = () => {
+        setIsSidebarOpen(false);
+    };
+
+    const handleShowFirm = () => {
+        showFirmHandler();
+        handleClose();
+    };
+
+    const handleShowProduct = () => {
+        showProductHandler();
+        handleClose();
+    };
+
+    const handleShowAllProducts = () => {
+        showAllProductsHandler();
+        handleClose();
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-primary bg-primary" style={{ position: "fixed", top: 0, width: "100%", zIndex: 1000 }}>
-            <div className="container d-flex justify-content-between align-items-center">
-                <span className="navbar-brand text-white d-flex align-items-center" onClick={showWelcomeHandler} style={{ cursor: "pointer" }}>
-                    <img src={logo} alt="Sigvvy Dashboard" style={{ maxHeight: '50px' }} />
-                    <span>Dashboard</span>
-                </span>
-
-                <span className="navbar-text text-white fw-300 d-lg-none mx-auto" style={{ textAlign: "center" }}>
-                    {showLogOut && restaurantName && (
-                        <>
-                            <FontAwesomeIcon icon={faUtensils} /> {restaurantName}
-                        </>
-                    )}
-                </span>
-
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    onClick={toggleNavbar}
-                    aria-controls="navbarNav"
-                    aria-expanded={isToggled}
-                    aria-label="Toggle navigation"
-                >
-                    <FontAwesomeIcon icon={isToggled ? faTimes : faBars} style={{ color: "white" }} />
-                </button>
-
-                <div className={`collapse navbar-collapse ${isToggled ? 'show' : ''}`} id="navbarNav">
-                    <ul className="navbar-nav ms-auto">
-                        {showLogOut ? (
-                            <li className="nav-item">
-                                <span className="nav-link text-white d-sm-block" onClick={onLogout} style={{ cursor: 'pointer'}}>
-                                    <FontAwesomeIcon icon={faUser} />
-                                    <span> Logout</span>
+        <>
+            {!isSidebarOpen && (
+                <div style={{ marginTop: "80px", position: "fixed", top: "30px", left: "20px", zIndex: "9999" }}>
+                    <FontAwesomeIcon 
+                        icon={faBars} 
+                        onClick={handleSidebarToggle} 
+                        style={{ fontSize: "24px", cursor: "pointer" }} 
+                    />
+                </div>
+            )}
+            <div 
+                className={`offcanvas offcanvas-start bg-light ${isSidebarOpen ? 'show' : ''}`} 
+                id="sidebar" 
+                style={{ width: "300px", visibility: isSidebarOpen ? 'visible' : 'hidden', marginTop: "80px" }}
+            >
+                <div className="offcanvas-header">
+                    <h5 className="offcanvas-title">Menu</h5>
+                    <button 
+                        type="button" 
+                        className="btn-close text-reset" 
+                        onClick={handleClose} 
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div className="offcanvas-body">
+                    <ul className="nav flex-column">
+                        <li className="nav-item">
+                            {showFirmTitle ? (
+                                <span 
+                                    className="nav-link text-dark sidebar-link mt-3" 
+                                    onClick={handleShowFirm} 
+                                    style={{ cursor: "pointer" }}
+                                >
+                                    <FontAwesomeIcon icon={faPlus} />
+                                    <span>Add Firm</span>
                                 </span>
-                            </li>
-                        ) : (
-                            <>
-                                <li className="nav-item">
-                                    <span className="nav-link text-white" onClick={showLoginHandler} style={{ cursor: 'pointer' }}>
-                                        <FontAwesomeIcon icon={faUser} />
-                                        <span> Login</span>
-                                    </span>
-                                </li>
-                                <li className="nav-item">
-                                    <span className="nav-link text-white" onClick={showRegisterHandler} style={{ cursor: 'pointer' }}>
-                                        <FontAwesomeIcon icon={faUserPlus} /> Register
-                                    </span>
-                                </li>
-                            </>
-                        )}
+                            ) : ""}
+                        </li>
+                        <li className="nav-item">
+                            <span 
+                                className="nav-link text-dark sidebar-link mt-4" 
+                                onClick={handleShowProduct} 
+                                style={{ cursor: "pointer" }}
+                            >
+                                <FontAwesomeIcon icon={faBuilding} /> Add Product
+                            </span>
+                        </li>
+                        <li className="nav-item">
+                            <span 
+                                className="nav-link text-dark sidebar-link mt-4" 
+                                onClick={handleShowAllProducts} 
+                                style={{ cursor: "pointer" }}
+                            >
+                                <FontAwesomeIcon icon={faList} /> All Products
+                            </span>
+                        </li>
+                        <li className="nav-item">
+                            <span className="nav-link text-dark sidebar-link mt-4">
+                                <FontAwesomeIcon icon={faUsers} /> Users
+                            </span>
+                        </li>
                     </ul>
                 </div>
             </div>
-
-            {showLogOut && restaurantName && (
-                <span className="navbar-text text-white fw-300 d-none d-lg-block mx-auto" style={{ position: "absolute", left: "50%", transform: "translateX(-50%)" }}>
-                    <FontAwesomeIcon icon={faUtensils} /> {restaurantName}
-                </span>
-            )}
-        </nav>
+        </>
     );
 };
 
-export default NavBar;
+export default SideBar;
