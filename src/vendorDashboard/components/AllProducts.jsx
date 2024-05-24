@@ -30,7 +30,7 @@ const AllProducts = () => {
 
     const handleDelete = async (productId) => {
         try {
-            await axios.delete(`https://backend-nodejs-restaurent-register-apis.onrender.com/product/delete/${productId}`);
+            await axios.delete(`http://localhost:8080/product/delete/${productId}`);
             setProducts(products.filter(product => product._id !== productId));
             alert("Product deleted successfully");
         } catch (error) {
@@ -75,7 +75,7 @@ const AllProducts = () => {
                         products.map(product => (
                             <div className="col-md-4 mb-4" key={product._id}>
                                 <Card className="product-card h-100">
-                                    {product.image && <Card.Img variant="top" src={`https://backend-nodejs-restaurent-register-apis.onrender.com/uploads/${product.image}`} />}
+                                    {product.image && <Card.Img variant="top" src={`http://localhost:8080/uploads/${product.image}`} />}
                                     <Card.Body className="d-flex flex-column">
                                         <Card.Title>{product.productName}</Card.Title>
                                         <Card.Text><strong>Description:</strong> {product.description}</Card.Text>

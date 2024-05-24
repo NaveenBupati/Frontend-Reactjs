@@ -9,7 +9,6 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [firmName, setFirmName] = useState('');
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -29,7 +28,7 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
         body: JSON.stringify({ email, password })
       });
       const data = await response.json();
-
+      
       if (response.ok) {
         const user = data.user;
         const firm = user.firm && user.firm.length > 0 ? user.firm[0] : null;
@@ -40,11 +39,9 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
 
           localStorage.setItem("firmName", firmName);
           localStorage.setItem("firmId", firmId);
-          setFirmName(firmName);  // Update firmName state
         } else {
           localStorage.removeItem("firmName");
           localStorage.removeItem("firmId");
-          setFirmName('');  // Clear firmName state
         }
 
         localStorage.setItem("loginToken", data.token);
@@ -57,7 +54,7 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
         setPassword('');
 
         const vendorId = data.vendorId;
-        const vendorResponse = await fetch(`https://backend-nodejs-restaurent-register-apis.onrender.com/vendor/singleVendor/${vendorId}`);
+        const vendorResponse = await fetch(`http://localhost:8080/vendor/singleVendor/${vendorId}`);
         const vendorData = await vendorResponse.json();
 
         if (vendorResponse.ok && vendorData.vendorFirmId) {
@@ -117,24 +114,9 @@ const VendorLogin = ({ showWelcomeHandler, showRegisterHandler }) => {
                 </Button>
               </Form>
 
-              {firmName && (
-                <div className="text-center mt-3">
-                  <h4>Welcome, {firmName}</h4>
-                </div>
-              )}
-
               <div className="text-center mt-3">
                 <h2>New user?</h2>
-                <Button 
-                  variant="link" 
-                  className="d-inline mb-1"
-                  style={{ textDecoration: 'none', color: '#007bff', fontWeight: 'bold' }}
-                  onMouseEnter={e => e.target.style.textDecoration = 'underline'}
-                  onMouseLeave={e => e.target.style.textDecoration = 'none'}
-                  onClick={showRegisterHandler}
-                >
-                  Click here to register
-                </Button>
+                <Button variant="link" onClick={showRegisterHandler}>Click here to register</Button>
               </div>
             </Card.Body>
           </Card>
