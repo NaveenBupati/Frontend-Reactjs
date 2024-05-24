@@ -31,13 +31,13 @@ const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, 
     return (
         <>
             {!isSidebarOpen && (
-                <div style={{ marginTop: "100px", position: "fixed", top: "100px", left: "20px", zIndex: "9999" }}>
-                    <FontAwesomeIcon 
-                        icon={faBars} 
-                        onClick={handleSidebarToggle} 
-                        style={{ fontSize: "24px", cursor: "pointer" }} 
-                    />
-                </div>
+                <div style={{ position: "fixed", top: "60px", left: "20px", zIndex: "9999" }}>
+                <FontAwesomeIcon 
+                    icon={faBars} 
+                    onClick={handleSidebarToggle} 
+                    style={{ fontSize: "24px", cursor: "pointer" }} 
+                />
+            </div>
             )}
             <div 
                 className={`offcanvas offcanvas-start bg-light ${isSidebarOpen ? 'show' : ''}`} 
