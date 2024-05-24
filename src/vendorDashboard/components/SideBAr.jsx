@@ -31,7 +31,7 @@ const SideBar = ({ showFirmHandler, showProductHandler, showAllProductsHandler, 
     return (
         <>
             {!isSidebarOpen && (
-                <div style={{ marginTop:"60px", position: "fixed", top: "60px", left: "0px", zIndex: "9999" }}>
+                    <div style={{ marginTop: "50px", position: "fixed", top: "30px", left: "20px", zIndex: "9999" }}>
                 <FontAwesomeIcon 
                     icon={faBars} 
                     onClick={handleSidebarToggle} 
