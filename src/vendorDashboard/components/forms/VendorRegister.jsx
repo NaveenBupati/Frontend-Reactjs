@@ -48,7 +48,7 @@ const VendorRegistration = ({showLoginHandler}) => {
   return (
     <div className="container container1">
       <div className="row justify-content-center">
-        <Col sm={12} md={8} lg={5} style={{ marginTop: "38px" }}>
+        <Col sm={12} md={8} lg={5} style={{ marginTop: "100px" }}>
           <Card className="mt-5 shadow">
             <Card.Body>
               <h2 className="text-center mb-4">Vendor Registration</h2>
