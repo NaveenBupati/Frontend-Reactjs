@@ -13,7 +13,7 @@ const NavBar = ({ showLoginHandler, showRegisterHandler, showWelcomeHandler, sho
     };
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-primary bg-primary" style={{ marginTop:"100px", position: "fixed", top: 0, width: "100%", zIndex: 1000 }}>
+        <nav className="navbar navbar-expand-lg navbar-primary bg-primary" style={{ position: "fixed", top: 0, width: "100%", zIndex: 1000 }}>
             <div className="container d-flex justify-content-between align-items-center">
                 <span className="navbar-brand text-white d-flex align-items-center" onClick={showWelcomeHandler} style={{ cursor: "pointer" }}>
                     <img src={logo} alt="Sigvvy Dashboard" style={{ maxHeight: '50px' }} />
