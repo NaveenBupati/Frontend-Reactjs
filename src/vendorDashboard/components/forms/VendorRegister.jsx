@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Form, Button, Col, Spinner } from 'react-bootstrap'; // Import Spinner component from react-bootstrap
+import { Card, Form, Button, Col, Spinner } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
  
@@ -20,8 +20,6 @@ const VendorRegistration = ({showLoginHandler}) => {
     e.preventDefault();
     setLoading(true);
     try {
-
-      //'http://localhost:8080/vendor/register/ -- for local we should cors in backend
       const response = await fetch('https://backend-nodejs-restaurent-register-apis.onrender.com/vendor/register/', {
         method: 'POST',
         headers: {
@@ -33,8 +31,6 @@ const VendorRegistration = ({showLoginHandler}) => {
       if (response.ok) {
         console.log(data)
         alert(" Vendor Registered Sucessfully..");
-        // Reset the input fields after successful registration
-        //using props redirect to Login page after sucessfull registration
         setuserName('');
         setEmail('');
         setPassword('');
@@ -45,7 +41,6 @@ const VendorRegistration = ({showLoginHandler}) => {
       alert("Registration failed")
     }
     finally {
-      // Stop loading regardless of success or failure
       setLoading(false);
     }
   }
@@ -98,7 +93,7 @@ const VendorRegistration = ({showLoginHandler}) => {
 
                 <Button className="col-md-12 mt-3" variant="primary" type="submit" block disabled={loading}>
                   {loading ? (
-                    <Spinner animation="border" size="sm" /> // Show spinner when loading
+                    <Spinner animation="border" size="sm" /> 
                   ) : (
                     'Register'
                   )}
